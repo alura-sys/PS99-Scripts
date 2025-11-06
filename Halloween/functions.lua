@@ -70,7 +70,7 @@ function M.start(uiObj)
             end
             if t.openHouse then
                 pcall(function()
-                    Network.Plots_Invoke:InvokeServer(plotId, "PurchaseEgg", house, 1)
+                    Network.Plots_Invoke:InvokeServer(plotId, "PurchaseEgg", house, 3)
                 end)
             end
             if t.claimCandy then
@@ -88,3 +88,4 @@ function M.stop()
 end
 
 return M
+
