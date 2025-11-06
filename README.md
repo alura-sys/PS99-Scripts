@@ -4,6 +4,12 @@ Event automation script for **PS99 Halloween 2025**.
 GUI was made via AI
 For customization just fork the repo and change **`execute.lua`** pathing to your git
 
+## Features
+- Auto Claim Candy
+- Auto Open Eggs
+- Auto Open Houses
+(All can be used simultaneously to quickly progress)
+
 ## Usage
 1. Copy the contents of **`execute.lua`**  
 2. Paste it into your preferred Roblox executor  
