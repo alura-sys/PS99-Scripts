@@ -1,6 +1,6 @@
 local Config = {}
 
-Config.LOOP_DELAY = 0.5
+Config.LOOP_DELAY = 0.01
 Config.SLOTS = {4, 5}
 
 Config.EGG_OPTIONS = {
@@ -25,3 +25,4 @@ Config.ui = {
 }
 
 return Config
+
