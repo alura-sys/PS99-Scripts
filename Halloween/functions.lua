@@ -50,8 +50,8 @@ function M.start(uiObj)
     local plotId = GetPlotId()
     thread = task.spawn(function()
         while running do
-            local egg = uiObj.getEgg()
-            local house = tonumber(uiObj.getHouse())
+            local egg = uiObj:getEgg()
+            local house = tonumber(uiObj:getHouse())
             local t = uiObj:getToggles()
             if t.openEggs then
                 if t.openMaxEggs then
@@ -88,4 +88,5 @@ function M.stop()
 end
 
 return M
+
 
