@@ -46,7 +46,7 @@ local thread = nil
 
 local function readQuests()
     local pg = Player:WaitForChild("PlayerGui")
-    local holder = pg["Goals Side"].Frame.Quests.QuestsGradient.QuestsHolder
+    local holder = pg["GoalsSide"].Frame.Quests.QuestsGradient.QuestsHolder
 
     return {
         easy = holder.easy.title.Text,
@@ -102,3 +102,4 @@ function M.stop()
 end
 
 return M
+
