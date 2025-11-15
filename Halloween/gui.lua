@@ -1,136 +1,116 @@
 local Config = require("Halloween/config")
+
 local GUI = {}
 GUI.__index = GUI
 
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/jensonhirst/Rayfield/refs/heads/main/source"))()
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 function GUI.mount(playerGui)
     local self = setmetatable({}, GUI)
 
     local Window = Rayfield:CreateWindow({
-        Name = "Alura Halloween",
-        LoadingTitle = "Halloween Autofarm",
+        Name = "Alura Halloween Autofarm",
+        LoadingTitle = "Halloween",
         LoadingSubtitle = "by Alura",
         ConfigurationSaving = {
             Enabled = true,
             FolderName = "AluraHalloween",
-            FileName = "HalloweenFarm"
+            FileName = "HalloweenConfig"
         },
-        KeySystem = false,
-        KeySettings = {
-            Title = "Alura Halloween",
-            Subtitle = "Key System",
-            Note = "No key required",
-            SaveKey = false,
-            Key = "NONE"
-        }
+        KeySystem = false
     })
 
     local Tab = Window:CreateTab("Main", 4483362458)
-    Tab:CreateSection("Settings")
 
     local selectedEgg = Config.defaults.selectedEgg
     local selectedHouse = Config.defaults.selectedHouse
-    local openEggs = Config.defaults.doOpenEggs
-    local openMaxEggs = Config.defaults.doOpenMaxEggs
-    local openHouse = Config.defaults.doOpenHouse
-    local claimCandy = Config.defaults.doClaimCandy
+    local toggleOpenEggs = Config.defaults.doOpenEggs
+    local toggleMaxEggs = Config.defaults.doOpenMaxEggs
+    local toggleOpenHouse = Config.defaults.doOpenHouse
+    local toggleClaimCandy = Config.defaults.doClaimCandy
     local running = false
 
-    local EggDropdown = Tab:CreateDropdown({
-        Name = "Egg",
+    Tab:CreateSection("Settings")
+
+    Tab:CreateDropdown({
+        Name = "Select Egg",
         Options = Config.EGG_OPTIONS,
         CurrentOption = selectedEgg,
-        Flag = "Halloween_Egg",
-        Callback = function(opt)
-            selectedEgg = opt
-        end,
+        Callback = function(option)
+            selectedEgg = option
+        end
     })
 
-    local HouseDropdown = Tab:CreateDropdown({
-        Name = "House",
+    Tab:CreateDropdown({
+        Name = "Select House",
         Options = Config.HOUSE_OPTIONS,
         CurrentOption = selectedHouse,
-        Flag = "Halloween_House",
-        Callback = function(opt)
-            selectedHouse = opt
-        end,
+        Callback = function(option)
+            selectedHouse = option
+        end
     })
 
-    Tab:CreateSection("Actions")
-
-    local ToggleOpenEggs = Tab:CreateToggle({
+    Tab:CreateToggle({
         Name = "Open Eggs",
-        CurrentValue = openEggs,
-        Flag = "Halloween_OpenEggs",
+        CurrentValue = toggleOpenEggs,
         Callback = function(v)
-            openEggs = v
-        end,
+            toggleOpenEggs = v
+        end
     })
 
-    local ToggleMaxEggs = Tab:CreateToggle({
+    Tab:CreateToggle({
         Name = "Open Max Eggs",
-        CurrentValue = openMaxEggs,
-        Flag = "Halloween_OpenMaxEggs",
+        CurrentValue = toggleMaxEggs,
         Callback = function(v)
-            openMaxEggs = v
-        end,
+            toggleMaxEggs = v
+        end
     })
 
-    local ToggleOpenHouse = Tab:CreateToggle({
+    Tab:CreateToggle({
         Name = "Open House",
-        CurrentValue = openHouse,
-        Flag = "Halloween_OpenHouse",
+        CurrentValue = toggleOpenHouse,
         Callback = function(v)
-            openHouse = v
-        end,
+            toggleOpenHouse = v
+        end
     })
 
-    local ToggleClaimCandy = Tab:CreateToggle({
+    Tab:CreateToggle({
         Name = "Claim Candy",
-        CurrentValue = claimCandy,
-        Flag = "Halloween_ClaimCandy",
+        CurrentValue = toggleClaimCandy,
         Callback = function(v)
-            claimCandy = v
-        end,
+            toggleClaimCandy = v
+        end
     })
+
+    Tab:CreateSection("Autofarm")
 
     self._onStart = nil
-    self._onStop  = nil
-    self._onExit  = nil
+    self._onStop = nil
+    self._onExit = nil
 
-    local AutofarmToggle = Tab:CreateToggle({
+    Tab:CreateToggle({
         Name = "Autofarm",
         CurrentValue = false,
-        Flag = "Halloween_Autofarm",
         Callback = function(v)
             if v and not running then
                 running = true
-                if self._onStart then
-                    self._onStart()
-                end
-                Rayfield:Notify("Halloween", "Autofarm started", 4483362458)
-            elseif (not v) and running then
+                if self._onStart then self._onStart() end
+                Rayfield:Notify("Autofarm", "Started.", 4483362458)
+            elseif not v and running then
                 running = false
-                if self._onStop then
-                    self._onStop()
-                end
-                Rayfield:Notify("Halloween", "Autofarm stopped", 4483362458)
+                if self._onStop then self._onStop() end
+                Rayfield:Notify("Autofarm", "Stopped.", 4483362458)
             end
-        end,
+        end
     })
 
     Tab:CreateButton({
         Name = "Exit",
         Callback = function()
-            if running and self._onStop then
-                self._onStop()
-            end
-            if self._onExit then
-                self._onExit()
-            end
+            if running and self._onStop then self._onStop() end
+            if self._onExit then self._onExit() end
             Rayfield:Destroy()
-        end,
+        end
     })
 
     function self:getEgg()
@@ -143,10 +123,10 @@ function GUI.mount(playerGui)
 
     function self:getToggles()
         return {
-            openEggs  = openEggs,
-            openMaxEggs = openMaxEggs,
-            openHouse = openHouse,
-            claimCandy = claimCandy,
+            openEggs = toggleOpenEggs,
+            openMaxEggs = toggleMaxEggs,
+            openHouse = toggleOpenHouse,
+            claimCandy = toggleClaimCandy
         }
     end
 
@@ -161,8 +141,6 @@ function GUI.mount(playerGui)
     function self:onExit(cb)
         self._onExit = cb
     end
-
-    Rayfield:LoadConfiguration()
 
     return self
 end
