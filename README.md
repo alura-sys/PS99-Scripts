@@ -1,9 +1,5 @@
 # PS99 Scripts
 
-Event automation script for **PS99 Halloween 2025**.  
-GUI was made via AI
-For customization just fork the repo and change **`execute.lua`** pathing to your git
-
 ## Features
 - Auto Claim Candy
 - Auto Open Eggs
