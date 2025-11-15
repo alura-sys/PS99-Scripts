@@ -44,6 +44,20 @@ local M = {}
 local running = false
 local thread = nil
 
+local function readQuests()
+    local pg = Player:WaitForChild("PlayerGui")
+    local holder = pg["Goals Side"].Frame.Quests.QuestsGradient.QuestsHolder
+
+    return {
+        easy = holder.easy.title.Text,
+        medium = holder.medium.title.Text,
+        hard = holder.hard.title.Text,
+        extreme = holder.extreme.title.Text
+    }
+end
+
+M.readQuests = readQuests
+
 function M.start(uiObj)
     if running then return end
     running = true
@@ -88,5 +102,3 @@ function M.stop()
 end
 
 return M
-
-
