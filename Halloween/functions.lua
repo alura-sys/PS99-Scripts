@@ -53,11 +53,16 @@ local function readQuests()
     local gradient = quests:WaitForChild("QuestsGradient")
     local holder = gradient:WaitForChild("QuestsHolder")
 
+    local easy = holder:WaitForChild("Easy")
+    local medium = holder:WaitForChild("Medium")
+    local hard = holder:WaitForChild("Hard")
+    local extreme = holder:WaitForChild("Extreme")
+
     return {
-        easy = holder.easy.title.Text,
-        medium = holder.medium.title.Text,
-        hard = holder.hard.title.Text,
-        extreme = holder.extreme.title.Text
+        easy = easy:WaitForChild("Title").Text,
+        medium = medium:WaitForChild("Title").Text,
+        hard = hard:WaitForChild("Title").Text,
+        extreme = extreme:WaitForChild("Title").Text,
     }
 end
 
@@ -107,3 +112,4 @@ function M.stop()
 end
 
 return M
+
