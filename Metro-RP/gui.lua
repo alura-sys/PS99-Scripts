@@ -9,20 +9,22 @@ function GUI.mount(playerGui)
     local self = setmetatable({}, GUI)
 
     local Window = Rayfield:CreateWindow({
-        Name = "Alura Movement Menu",
-        LoadingTitle = "Movement Tools",
-        LoadingSubtitle = "by Alura",
+        Name = "Alura-sys",
+        LoadingTitle = "Metro-RP",
+        LoadingSubtitle = "Alura-sys",
         ConfigurationSaving = {
             Enabled = true,
-            FolderName = "AluraMovement",
-            FileName = "MovementConfig"
+            FolderName = "Alura-sys",
+            FileName = "Metro-RP-Config"
         },
         KeySystem = false
     })
 
-    local Tab = Window:CreateTab("Main", 4483362458)
+    task.wait(5)
+    local gui = game:GetService("CoreGui"):WaitForChild("Rayfield")
+    gui.Size = UDim2.new(0, 350, 0, 400)
 
-    Tab:CreateSection("Teleport System")
+    local Tab = Window:CreateTab("Main", 4483362458)
 
     local selectedPlayer = nil
 
@@ -47,22 +49,20 @@ function GUI.mount(playerGui)
         Name = "Teleport",
         Callback = function()
             if not selectedPlayer then
-                Rayfield:Notify("Teleport", "No player selected", 4483362458)
+                --Rayfield:Notify("Teleport", "No player selected", 4483362458)
                 return
             end
             local ok, err = Functions.teleportToPlayer(selectedPlayer)
             if ok then
-                Rayfield:Notify("Teleport", "Teleported to " .. selectedPlayer, 4483362458)
+                --Rayfield:Notify("Teleport", "Teleported to " .. selectedPlayer, 4483362458)
             else
-                Rayfield:Notify("Teleport Error", err or "failed", 4483362458)
+                --Rayfield:Notify("Teleport Error", err or "failed", 4483362458)
             end
         end
     })
 
-    Tab:CreateSection("Fly Movement")
-
     Tab:CreateToggle({
-        Name = "Fly (WASD + Space/Shift)",
+        Name = "Omnifly",
         CurrentValue = false,
         Callback = function(v)
             if v then
