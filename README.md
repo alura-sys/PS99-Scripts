@@ -1,13 +1,4 @@
-# PS99 Scripts
-
-## Features
-- Auto Claim Candy
-- Auto Open Eggs
-- Auto Open Houses
-
-## Usage
-1. Copy the contents of **`execute.lua`**  
-2. Paste it into your preferred Roblox executor  
+# Roblox Lua Scripts
 
 ## Structure
 - `exec.lua` – main bootstrapper  
