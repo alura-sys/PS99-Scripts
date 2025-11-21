@@ -20,11 +20,13 @@ function GUI.mount(playerGui)
         KeySystem = false
     })
 
-    task.wait(5)
-    local gui = game:GetService("CoreGui"):WaitForChild("Rayfield")
-    gui.Size = UDim2.new(0, 200, 0, 400)
+    local Tab = Window:CreateTab("Main", 4483362458)
+    
+    task.wait(0.2)
+    local rf = game:GetService("CoreGui"):WaitForChild("Rayfield", 5)
+    local main = rf:WaitForChild("Main", 5)
 
-        local Tab = Window:CreateTab("Main", 4483362458)
+    main.Size = UDim2.new(0, 350, 0, 400)
 
     Tab:CreateSection("Teleports")
 
